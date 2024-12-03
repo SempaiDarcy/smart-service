@@ -1,5 +1,5 @@
 import { FaHome, FaList, FaUser } from 'react-icons/fa';
-import s from './Navbar.module.scss';
+import s from './navbar.module.scss';
 
 export const Navbar = () => {
     return (
