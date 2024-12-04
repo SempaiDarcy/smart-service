@@ -1,26 +1,40 @@
-import { FaHome, FaList, FaUser } from 'react-icons/fa';
-import s from './navbar.module.scss';
+import { FaHome, FaList, FaUser } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+
+import s from "./navbar.module.scss";
+import {useAuth} from "../../context/auth-context.tsx";
 
 export const Navbar = () => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout(); // Выходим из системы
+        navigate("/"); // Перенаправляем на AuthLanding
+    };
+
     return (
         <nav className={s.navbar}>
             <ul className={s.navList}>
                 <li className={s.navItem}>
-                    <a href="/">
+                    <Link to="/">
                         <FaHome /> Главная
-                    </a>
+                    </Link>
                 </li>
                 <li className={s.navItem}>
-                    <a href="/catalog">
+                    <Link to="/catalog">
                         <FaList /> Каталог
-                    </a>
+                    </Link>
                 </li>
                 <li className={s.navItem}>
-                    <a href="/profile">
+                    <Link to="/profile">
                         <FaUser /> Личный кабинет
-                    </a>
+                    </Link>
                 </li>
             </ul>
+            <button className={s.logoutButton} onClick={handleLogout}>
+                Выйти
+            </button>
         </nav>
     );
 };
