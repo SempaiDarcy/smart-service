@@ -1,15 +1,16 @@
-import './app.css'
-import {Navbar} from "./components/navbar/navbar.tsx";
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Navbar } from './components/navbar/navbar';
 function App() {
     return (
-        <>
+        <Router>
             <Navbar />
-            <div style={{textAlign:'center'}}>
-                <h1>Добро пожаловать на платформу!</h1>
-            </div>
-        </>
+            <Routes>
+                <Route path="/" element={''} />
+                <Route path="/catalog" element={''} />
+                <Route path="/profile" element={''} />
+            </Routes>
+        </Router>
     );
 }
 
-export default App
+export default App;
