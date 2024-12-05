@@ -2,28 +2,97 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 2rem;
-    text-align: center;
 
     h1 {
         font-size: 2.5rem;
         color: #333;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
     }
 
-    .info {
-        font-size: 1.2rem;
-        line-height: 1.8;
+    .profileInfo {
+        display: flex;
+        gap: 2rem;
+        width: 100%;
+        max-width: 800px;
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-        strong {
-            color: #007bff;
+    .avatar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+
+        .changePhoto {
+            background-color: #3B82F6;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #2563EB;
+            }
+        }
+    }
+
+    .details {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+
+            strong {
+                color: #3B82F6;
+            }
+        }
+
+        input {
+            font-size: 1rem;
+            padding: 0.5rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 4px;
+
+            &:focus {
+                border-color: #3B82F6;
+                outline: none;
+            }
+        }
+
+        .editButton, .saveButton {
+            background-color: #10B981;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: #059669;
+            }
         }
     }
 
     .error {
         color: red;
         font-size: 1.2rem;
-        margin-top: 2rem;
     }
 }

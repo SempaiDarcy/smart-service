@@ -10,8 +10,6 @@ body, html {
   font-family: 'Roboto', sans-serif;
   background-color: #F4F4F9;
   color: #1E293B;
-  /*overflow: hidden;*/
-  overflow: hidden;
 }
 
 #root {

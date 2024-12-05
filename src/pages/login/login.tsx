@@ -4,15 +4,15 @@ import s from "./login.module.scss";
 import { useAuth } from "../../context/auth-context.tsx";
 
 export const Login = () => {
-    const [login, setLogin] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const { login: authenticate } = useAuth();
 
     const handleLogin = () => {
-        if (!login.trim()) {
-            setError("Введите логин.");
+        if (!email.trim()) {
+            setError("Введите почту.");
             return;
         }
         if (!password.trim()) {
@@ -22,11 +22,11 @@ export const Login = () => {
 
         const users = JSON.parse(localStorage.getItem("myProject_users") || "[]");
         const user = users.find(
-            (u: any) => u.login === login && u.password === password
+            (u: any) => u.email === email && u.password === password
         );
 
         if (!user) {
-            setError("Неверный логин или пароль!");
+            setError("Неверная почта или пароль!");
             return;
         }
 
@@ -39,10 +39,10 @@ export const Login = () => {
             <h1>Вход</h1>
             {error && <p className={s.error}>{error}</p>}
             <input
-                type="text"
-                placeholder="Логин"
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
+                type="email"
+                placeholder="Почта"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
             />
             <input
                 type="password"

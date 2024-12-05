@@ -6,8 +6,8 @@ import { useAuth } from "../../context/auth-context.tsx";
 export const Register = () => {
     const [lastName, setLastName] = useState("");
     const [firstName, setFirstName] = useState("");
-    const [middleName, setMiddleName] = useState(""); // Отчество (может быть пустым)
-    const [login, setLogin] = useState("");
+    const [middleName, setMiddleName] = useState("");
+    const [email, setEmail] = useState(""); // Почта
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -19,15 +19,15 @@ export const Register = () => {
             setError("Фамилия и Имя обязательны для заполнения.");
             return false;
         }
-        if (!login.trim()) {
-            setError("Логин не может быть пустым.");
+        if (!email.trim() || !/^[\w.%+-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            setError("Введите корректный адрес электронной почты.");
             return false;
         }
         if (password.length < 8 || !/[A-Za-z]/.test(password) || !/\d/.test(password)) {
             setError("Пароль должен содержать минимум 8 символов, хотя бы одну букву и одну цифру.");
             return false;
         }
-        setError(""); // Если ошибок нет
+        setError("");
         return true;
     };
 
@@ -35,8 +35,8 @@ export const Register = () => {
         if (!validateFields()) return;
 
         const users = JSON.parse(localStorage.getItem("myProject_users") || "[]");
-        if (users.find((u: any) => u.login === login)) {
-            setError("Пользователь с таким логином уже существует!");
+        if (users.find((u: any) => u.email === email)) {
+            setError("Пользователь с такой почтой уже зарегистрирован!");
             return;
         }
 
@@ -45,13 +45,13 @@ export const Register = () => {
             lastName,
             firstName,
             middleName,
-            login,
+            email,
             password,
         };
 
         localStorage.setItem("myProject_users", JSON.stringify([...users, newUser]));
-        authenticate(newUser);
-        navigate("/");
+        authenticate(newUser); // Аутентификация после регистрации
+        navigate("/"); // Переход на главную
     };
 
     return (
@@ -77,10 +77,10 @@ export const Register = () => {
                 onChange={(e) => setMiddleName(e.target.value)}
             />
             <input
-                type="text"
+                type="email"
                 placeholder="Почта"
-                value={login}
-                onChange={(e) => setLogin(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
             />
             <input
                 type="password"
