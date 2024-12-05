@@ -1,0 +1,67 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5rem;
+
+    h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+    .profileInfo {
+        display: flex;
+        gap: 2rem;
+        width: 100%;
+        max-width: 500px;
+        background-color: #FFFFFF;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .avatarContainer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background-color: whitesmoke;
+            border: 1px solid #006d77;
+            &:hover {
+                background-color: #f0f0f0;
+            }
+
+            svg {
+                color: #006d77;
+            }
+        }
+    }
+
+    .details {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        strong {
+            color: #007bff;
+        }
+    }
+
+    .error {
+        color: red;
+        font-size: 1.2rem;
+    }
+}

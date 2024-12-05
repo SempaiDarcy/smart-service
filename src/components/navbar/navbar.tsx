@@ -1,8 +1,8 @@
-import { FaHome, FaList, FaUser } from "react-icons/fa";
+import { FaHome, FaList, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 
 import s from "./navbar.module.scss";
-import {useAuth} from "../../context/auth-context.tsx";
+import { useAuth } from "../../context/auth-context.tsx";
 
 export const Navbar = () => {
     const { logout } = useAuth();
@@ -31,10 +31,12 @@ export const Navbar = () => {
                         <FaUser /> Личный кабинет
                     </Link>
                 </li>
+                <li className={s.navItem} onClick={handleLogout}>
+                    <a>
+                        <FaSignOutAlt /> Выйти
+                    </a>
+                </li>
             </ul>
-            <button className={s.logoutButton} onClick={handleLogout}>
-                Выйти
-            </button>
         </nav>
     );
 };

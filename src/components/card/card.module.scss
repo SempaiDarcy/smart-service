@@ -1,0 +1,14 @@
+.card {
+  height: 100%;
+  //border: 1px solid #E5E7EB;
+  //border-radius: 10px;
+  text-align: center;
+  color: white;
+  //margin: 0 10rem 0 10rem;
+  box-shadow:
+          1px 1px 2px rgb(0 0 0 / 10%),
+          -1px -1px 2px rgb(0 0 0 / 10%);
+}
+.card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Тень при наведении */
+}
