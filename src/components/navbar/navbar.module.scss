@@ -17,24 +17,48 @@
   padding: 0;
   margin: 0;
 }
-
 .navItem {
   margin: 0 1rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   cursor: pointer;
+
   a {
     text-decoration: none;
-    color: #E5E7EB;
-    //color: #86C232;
+    color: #e5e7eb;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
     &:hover {
-      color: #3B82F6;
+      color: gray;
+    }
+  }
+
+  &.active {
+    a {
+      color: #3b82f6; // Цвет активного пункта
+      font-weight: bold;
     }
   }
 }
+
+//.navItem {
+//  margin: 0 1rem;
+//  font-size: 1.2rem;
+//  cursor: pointer;
+//  a {
+//    text-decoration: none;
+//    color: #E5E7EB;
+//    //color: #86C232;
+//    display: flex;
+//    align-items: center;
+//    gap: 0.5rem;
+//
+//    &:hover {
+//      color: #3B82F6;
+//    }
+//  }
+//}
 .logoutButton {
 
   background-color: #6B6E70;
