@@ -1,42 +1,50 @@
 import { FaHome, FaList, FaUser, FaSignOutAlt } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 import s from "./navbar.module.scss";
 import { useAuth } from "../../context/auth-context.tsx";
 
 export const Navbar = () => {
+
     const { logout } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const handleLogout = () => {
         logout(); // Выходим из системы
         navigate("/"); // Перенаправляем на AuthLanding
     };
 
+    const isActive = (path: string) => location.pathname === path; // Проверяем, соответствует ли путь
+
     return (
-        <nav className={s.navbar}>
-            <ul className={s.navList}>
-                <li className={s.navItem}>
+        <Box component="nav" className={s.navbar}>
+            <Box component="ul" className={s.navList}>
+                <Box component="li" className={`${s.navItem} ${isActive("/") ? s.active : ""}`}>
                     <Link to="/">
-                        <FaHome /> Главная
+                        <FaHome />
+                        <Typography component="span">Главная</Typography>
                     </Link>
-                </li>
-                <li className={s.navItem}>
+                </Box>
+                <Box component="li" className={`${s.navItem} ${isActive("/catalog") ? s.active : ""}`}>
                     <Link to="/catalog">
-                        <FaList /> Каталог
+                        <FaList />
+                        <Typography component="span">Каталог</Typography>
                     </Link>
-                </li>
-                <li className={s.navItem}>
+                </Box>
+                <Box component="li" className={`${s.navItem} ${isActive("/profile") ? s.active : ""}`}>
                     <Link to="/profile">
-                        <FaUser /> Личный кабинет
+                        <FaUser />
+                        <Typography component="span">Личный кабинет</Typography>
                     </Link>
-                </li>
-                <li className={s.navItem} onClick={handleLogout}>
+                </Box>
+                <Box component="li" className={s.navItem} onClick={handleLogout}>
                     <a>
-                        <FaSignOutAlt /> Выйти
+                        <FaSignOutAlt />
+                        <Typography component="span">Выйти</Typography>
                     </a>
-                </li>
-            </ul>
-        </nav>
+                </Box>
+            </Box>
+        </Box>
     );
 };

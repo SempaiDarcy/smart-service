@@ -1,95 +1,221 @@
-import greentech from './../assets/company/greentech.jpg'
-import edusmart from './../assets/company/edusmart.jpg'
-import medicare from './../assets/company/medicare.jpg'
-import agroworld from './../assets/company/agroworld.jpg'
-import lampochka from './../assets/company/lampochka.jpg'
-import itechnology from './../assets/company/itechnology.png'
-import eventpro from './../assets/company/eventpro.jpg'
-import fintech from './../assets/company/fintech.jpg'
-import ithelp from './../assets/company/ithelp.png'
+import greentech from './../assets/company/greentech.jpg';
+import edusmart from './../assets/company/edusmart.jpg';
+import medicare from './../assets/company/medicare.jpg';
+import agroworld from './../assets/company/agroworld.jpg';
+import lampochka from './../assets/company/lampochka.jpg';
+import itechnology from './../assets/company/itechnology.png';
+import eventpro from './../assets/company/eventpro.jpg';
+import fintech from './../assets/company/fintech.jpg';
+import ithelp from './../assets/company/ithelp.png';
+import { Company} from "../types/company.ts";
 
-
-export const companiesArray = [
+export const companiesArray: Company[] = [
     {
         id: 1,
         name: "EventPro",
-        description: "Платформа для автоматизации мероприятий с использованием современных веб-технологий.",
+        description: "Платформа для автоматизации мероприятий.",
+        detailedDescription: "EventPro предоставляет инновационные решения для управления мероприятиями любого масштаба. Мы используем современные веб-технологии, чтобы сделать процесс организации простым и эффективным.",
         photo: eventpro,
-        rating: 4.0,
-        reviews: [],
+        rating: 4.5,
+        reviews: [
+            { userId: 101, userName: "Алиса Иванова", comment: "Отличная платформа! Очень помогает в организации мероприятий.", rating: 5, userPhoto: "https://example.com/photos/user1.jpg" },
+            { userId: 102, userName: "Иван Петров", comment: "Удобный интерфейс и отличные функции.", rating: 4, userPhoto: "https://example.com/photos/user2.jpg" },
+        ],
         likes: 9,
+        email: "contact@eventpro.com",
+        address: "Москва, ул. Примерная, д. 10",
+        services: [
+            { name: "Планирование мероприятий", description: "Комплексные услуги по планированию мероприятий любого типа.", priceRange: "30 000 - 300 000 руб." },
+            { name: "Аренда оборудования", description: "Аренда звукового и светового оборудования.", priceRange: "10 000 - 200 000 руб." },
+            { name: "Координация на месте", description: "Профессиональная координация в день мероприятия.", priceRange: "20 000 - 100 000 руб." },
+        ],
+        website: "www.eventpro.com",
+        workingHours: "09:00 - 18:00",
+        workingDays: "Пн - Пт",
     },
     {
         id: 2,
         name: "GreenTech",
-        description: "Компания, разрабатывающая экологичные решения с применением IoT и облачных технологий.",
+        description: "Компания, разрабатывающая экологичные решения.",
+        detailedDescription: "GreenTech специализируется на разработке экологически чистых технологий и продуктов, которые помогают сократить углеродный след и улучшить качество жизни.",
         photo: greentech,
         rating: 4.2,
-        reviews: [],
+        reviews: [
+            { userId: 103, userName: "Олег Смирнов", comment: "Замечательные экологические решения. Рекомендую!", rating: 4, userPhoto: "https://example.com/photos/user3.jpg" },
+            { userId: 104, userName: "Мария Кузнецова", comment: "Хорошие технологии, но немного дороговато.", rating: 3, userPhoto: "https://example.com/photos/user4.jpg" },
+        ],
         likes: 12,
+        email: "info@greentech.com",
+        address: "Санкт-Петербург, ул. Эко, д. 22",
+        services: [
+            { name: "IoT решения", description: "Умные IoT решения для мониторинга окружающей среды.", priceRange: "100 000 - 1 000 000 руб." },
+            { name: "Экологические консультации", description: "Консультационные услуги по улучшению экологической практики.", priceRange: "15 000 - 150 000 руб." },
+            { name: "Аудиты по устойчивости", description: "Аудиты для оценки устойчивости бизнеса.", priceRange: "30 000 - 300 000 руб." },
+        ],
+        website: "www.greentech.com",
+        workingHours: "10:00 - 19:00",
+        workingDays: "Пн - Сб",
     },
     {
         id: 3,
         name: "FinTech Solutions",
-        description: "Разработка инновационных финансовых приложений и API для банков и финтех-стартапов.",
+        description: "Разработка инновационных финансовых приложений.",
+        detailedDescription: "FinTech Solutions предлагает широкий спектр финансовых технологий, включая API для банков и стартапов, а также кастомизированные приложения для бизнеса.",
         photo: fintech,
         rating: 4.7,
-        reviews: [],
+        reviews: [
+            { userId: 105, userName: "Петр Сидоров", comment: "Отличные решения для бизнеса!", rating: 5, userPhoto: "https://example.com/photos/user5.jpg" },
+            { userId: 106, userName: "Алексей Иванов", comment: "Не хватает документации для разработчиков.", rating: 3, userPhoto: "https://example.com/photos/user6.jpg" },
+        ],
         likes: 17,
+        email: "support@fintech.com",
+        address: "Екатеринбург, ул. Финансовая, д. 5",
+        services: [
+            { name: "Разработка приложений", description: "Создание кастомизированных финансовых приложений.", priceRange: "50 000 - 500 000 руб." },
+            { name: "API для банков", description: "Разработка API для интеграции с банковскими системами.", priceRange: "100 000 - 1 000 000 руб." },
+            { name: "Консультации по финансам", description: "Финансовые консультации для бизнеса.", priceRange: "10 000 - 100 000 руб." },
+        ],
+        website: "www.fintechsolutions.com",
+        workingHours: "08:00 - 17:00",
+        workingDays: "Пн - Пт",
     },
     {
         id: 4,
         name: "EduSmart",
-        description: "Онлайн-платформа для обучения программированию и развития навыков разработки.",
+        description: "Онлайн-платформа для обучения.",
+        detailedDescription: "EduSmart предлагает курсы по программированию и другим IT-направлениям. Мы помогаем людям развивать навыки и находить работу в сфере технологий.",
         photo: edusmart,
-        rating: 4.9,
-        reviews: [],
+        rating: 4.8,
+        reviews: [
+            { userId: 107, userName: "Дмитрий Фролов", comment: "Лучший ресурс для обучения программированию!", rating: 5, userPhoto: "https://example.com/photos/user7.jpg" },
+            { userId: 108, userName: "Елена Григорьева", comment: "Много полезной информации и курсов.", rating: 4, userPhoto: "https://example.com/photos/user8.jpg" },
+        ],
         likes: 20,
+        email: "info@edusmart.com",
+        address: "Казань, ул. Учебная, д. 15",
+        services: [
+            { name: "Курсы по программированию", description: "Онлайн-курсы по языкам программирования.", priceRange: "5 000 - 30 000 руб." },
+            { name: "Мастер-классы", description: "Практические мастер-классы по современным технологиям.", priceRange: "3 000 - 15 000 руб." },
+            { name: "Консультации", description: "Индивидуальные консультации по обучению.", priceRange: "1 000 - 5 000 руб." },
+        ],
+        website: "www.edusmart.com",
+        workingHours: "09:00 - 20:00",
+        workingDays: "Пн - Вс",
     },
     {
         id: 5,
         name: "It-Help",
-        description: "Служба поддержки IT-инфраструктуры и разработка кастомизированных решений.",
+        description: "Служба поддержки IT-инфраструктуры.",
+        detailedDescription: "It-Help предоставляет услуги по поддержке и обслуживанию IT-инфраструктуры для бизнеса, а также разработку кастомизированных решений.",
         photo: ithelp,
         rating: 4.3,
-        reviews: [],
+        reviews: [
+            { userId: 109, userName: "Сергей Алексеев", comment: "Хорошая служба поддержки.", rating: 4, userPhoto: "https://example.com/photos/user9.jpg" },
+            { userId: 110, userName: "Татьяна Лебедева", comment: "Проблемы решаются быстро.", rating: 5, userPhoto: "https://example.com/photos/user10.jpg" },
+        ],
         likes: 11,
+        email: "help@ithelp.com",
+        address: "Новосибирск, ул. IT, д. 8",
+        services: [
+            { name: "Поддержка IT-инфраструктуры", description: "Услуги по технической поддержке IT-систем.", priceRange: "20 000 - 200 000 руб." },
+            { name: "Разработка ПО", description: "Создание программного обеспечения под заказ.", priceRange: "50 000 - 500 000 руб." },
+            { name: "Консультации", description: "Консультации по оптимизации IT-ресурсов.", priceRange: "10 000 - 100 000 руб." },
+        ],
+        website: "www.ithelp.com",
+        workingHours: "09:00 - 18:00",
+        workingDays: "Пн - Пт",
     },
     {
         id: 6,
         name: "MediCare",
-        description: "Инновационные программные решения для медицинских учреждений и телемедицины.",
+        description: "Инновационные программные решения для медицины.",
+        detailedDescription: "MediCare предлагает передовые программные решения для медицинских учреждений. Мы помогаем оптимизировать процессы и улучшить качество обслуживания.",
         photo: medicare,
-        rating: 4.7,
-        reviews: [],
+        rating: 4.6,
+        reviews: [
+            { userId: 111, userName: "Артем Васильев", comment: "Отличный софт для медицины.", rating: 5, userPhoto: "https://example.com/photos/user11.jpg" },
+            { userId: 112, userName: "Светлана Романова", comment: "Идеально для клиник.", rating: 4, userPhoto: "https://example.com/photos/user12.jpg" },
+        ],
         likes: 18,
+        email: "info@medicare.com",
+        address: "Москва, ул. Медицинская, д. 3",
+        services: [
+            { name: "Программное обеспечение для клиник", description: "Разработка ПО для управления клиниками.", priceRange: "100 000 - 1 000 000 руб." },
+            { name: "Телемедицина", description: "Услуги телемедицины для удаленного обслуживания.", priceRange: "50 000 - 500 000 руб." },
+            { name: "Управление данными", description: "Системы для управления медицинскими данными.", priceRange: "30 000 - 300 000 руб." },
+        ],
+        website: "www.medicare.com",
+        workingHours: "08:00 - 17:00",
+        workingDays: "Пн - Пт",
     },
     {
         id: 7,
         name: "AgroWorld",
-        description: "Разработка IT-инструментов для автоматизации сельскохозяйственного бизнеса.",
+        description: "Разработка IT-инструментов для сельского хозяйства.",
+        detailedDescription: "AgroWorld предлагает современные IT-решения для автоматизации процессов в сельском хозяйстве.",
         photo: agroworld,
-        rating: 3.6,
-        reviews: [],
+        rating: 4.0,
+        reviews: [
+            { userId: 113, userName: "Евгений Рябов", comment: "Хорошие инструменты для агробизнеса.", rating: 4, userPhoto: "https://example.com/photos/user13.jpg" },
+            { userId: 114, userName: "Ксения Пономарева", comment: "Помогли оптимизировать процессы.", rating: 4, userPhoto: "https://example.com/photos/user14.jpg" },
+        ],
         likes: 5,
+        email: "contact@agroworld.com",
+        address: "Калуга, ул. Сельская, д. 10",
+        services: [
+            { name: "Агро-IT решения", description: "IT-решения для автоматизации агропроизводства.", priceRange: "50 000 - 500 000 руб." },
+            { name: "Консультации для фермеров", description: "Консультации по внедрению технологий в сельском хозяйстве.", priceRange: "10 000 - 50 000 руб." },
+            { name: "Автоматизация процессов", description: "Услуги по автоматизации агрономических процессов.", priceRange: "20 000 - 200 000 руб." },
+        ],
+        website: "www.agroworld.com",
+        workingHours: "09:00 - 17:00",
+        workingDays: "Пн - Пт",
     },
     {
         id: 8,
         name: "LightBULB",
-        description: "Решения для умного дома и освещения, основанные на программируемых микроконтроллерах.",
+        description: "Умные решения для освещения.",
+        detailedDescription: "LightBULB предлагает инновационные решения для умного освещения. Мы используем современные технологии, чтобы сделать ваш дом более комфортным и безопасным.",
         photo: lampochka,
-        rating: 4.0,
-        reviews: [],
+        rating: 4.1,
+        reviews: [
+            { userId: 115, userName: "Евгений Кузнецов", comment: "Интересные решения, но цена высока.", rating: 3, userPhoto: "https://example.com/photos/user15.jpg" },
+            { userId: 116, userName: "Людмила Сидорова", comment: "Довольна покупкой. Рекомендую!", rating: 5, userPhoto: "https://example.com/photos/user16.jpg" },
+        ],
         likes: 7,
+        email: "info@lightbulb.com",
+        address: "Ростов-на-Дону, ул. Светлая, д. 5",
+        services: [
+            { name: "Умное освещение", description: "Системы умного освещения для дома и офиса.", priceRange: "10 000 - 100 000 руб." },
+            { name: "Консультации по освещению", description: "Консультации по выбору и установке освещения.", priceRange: "5 000 - 20 000 руб." },
+            { name: "Продажа оборудования", description: "Продажа оборудования для освещения.", priceRange: "1 000 - 50 000 руб." },
+        ],
+        website: "www.lightbulb.com",
+        workingHours: "10:00 - 19:00",
+        workingDays: "Пн - Сб",
     },
     {
         id: 9,
         name: "ITECHNOLOGY",
-        description: "Компания, создающая IT-продукты для автоматизации бизнеса и повышения производительности.",
+        description: "IT-продукты для бизнеса.",
+        detailedDescription: "ITECHNOLOGY создает IT-продукты для автоматизации бизнеса и повышения производительности.",
         photo: itechnology,
         rating: 4.6,
-        reviews: [],
+        reviews: [
+            { userId: 117, userName: "Роман Гусев", comment: "Качественные продукты.", rating: 5, userPhoto: "https://example.com/photos/user17.jpg" },
+            { userId: 118, userName: "Светлана Мельникова", comment: "Проблемы с интеграцией.", rating: 3, userPhoto: "https://example.com/photos/user18.jpg" },
+        ],
         likes: 16,
+        email: "info@itechnology.com",
+        address: "Воронеж, ул. IT, д. 20",
+        services: [
+            { name: "Разработка ПО", description: "Создание программного обеспечения под заказ.", priceRange: "50 000 - 500 000 руб." },
+            { name: "IT-консалтинг", description: "Консультации по оптимизации IT-процессов.", priceRange: "10 000 - 100 000 руб." },
+            { name: "Системная интеграция", description: "Интеграция различных IT-систем.", priceRange: "30 000 - 300 000 руб." },
+        ],
+        website: "www.itechnology.com",
+        workingHours: "09:00 - 18:00",
+        workingDays: "Пн - Пт",
     },
 ];
 
@@ -97,3 +223,303 @@ export const companiesArray = [
 if (!localStorage.getItem("companies")) {
     localStorage.setItem("companies", JSON.stringify(companiesArray));
 }
+
+
+
+// import greentech from './../assets/company/greentech.jpg';
+// import edusmart from './../assets/company/edusmart.jpg';
+// import medicare from './../assets/company/medicare.jpg';
+// import agroworld from './../assets/company/agroworld.jpg';
+// import lampochka from './../assets/company/lampochka.jpg';
+// import itechnology from './../assets/company/itechnology.png';
+// import eventpro from './../assets/company/eventpro.jpg';
+// import fintech from './../assets/company/fintech.jpg';
+// import ithelp from './../assets/company/ithelp.png';
+// import { Company } from "../types/company.ts";
+//
+// export const companiesArray: Company[] = [
+//     {
+//         id: 1,
+//         name: "EventPro",
+//         description: "Платформа для автоматизации мероприятий.",
+//         detailedDescription: "EventPro предоставляет инновационные решения для управления мероприятиями любого масштаба. Мы используем современные веб-технологии, чтобы сделать процесс организации простым и эффективным. Наша команда профессионалов готова поддержать вас на каждом этапе.",
+//         photo: eventpro,
+//         rating: 4.5,
+//         reviews: [
+//             {
+//                 userId: 101,
+//                 userName: "Алиса Иванова",
+//                 comment: "Отличная платформа! Очень помогает в организации мероприятий.",
+//                 rating: 5,
+//                 userPhoto: "https://example.com/photos/user1.jpg",
+//             },
+//             {
+//                 userId: 102,
+//                 userName: "Иван Петров",
+//                 comment: "Удобный интерфейс и отличные функции.",
+//                 rating: 4,
+//                 userPhoto: "https://example.com/photos/user2.jpg",
+//             },
+//         ],
+//         likes: 9,
+//         email: "contact@eventpro.com",
+//         address: "Москва, ул. Примерная, д. 10",
+//         services: ["Организация мероприятий", "Координация событий", "Аренда оборудования"],
+//         website: "www.eventpro.com",
+//         workingHours: "09:00 - 18:00",
+//         workingDays: "Пн - Пт",
+//     },
+//     {
+//         id: 2,
+//         name: "GreenTech",
+//         description: "Компания, разрабатывающая экологичные решения.",
+//         detailedDescription: "GreenTech специализируется на разработке экологически чистых технологий и продуктов, которые помогают сократить углеродный след и улучшить качество жизни. Мы предлагаем широкий спектр услуг, включая консультации и аудит.",
+//         photo: greentech,
+//         rating: 4.2,
+//         reviews: [
+//             {
+//                 userId: 103,
+//                 userName: "Олег Смирнов",
+//                 comment: "Замечательные экологические решения. Рекомендую!",
+//                 rating: 4,
+//                 userPhoto: "https://example.com/photos/user3.jpg",
+//             },
+//             {
+//                 userId: 104,
+//                 userName: "Мария Кузнецова",
+//                 comment: "Хорошие технологии, но немного дороговато.",
+//                 rating: 3,
+//                 userPhoto: "https://example.com/photos/user4.jpg",
+//             },
+//         ],
+//         likes: 12,
+//         email: "info@greentech.com",
+//         address: "Санкт-Петербург, ул. Эко, д. 22",
+//         services: ["Разработка IoT решений", "Консультации по экологии", "Экологический аудит"],
+//         website: "www.greentech.com",
+//         workingHours: "10:00 - 19:00",
+//         workingDays: "Пн - Сб",
+//     },
+//     {
+//         id: 3,
+//         name: "FinTech Solutions",
+//         description: "Разработка инновационных финансовых приложений.",
+//         detailedDescription: "FinTech Solutions предлагает широкий спектр финансовых технологий, включая API для банков и стартапов, а также кастомизированные приложения для бизнеса. Наша команда экспертов готова помочь вам достичь ваших целей.",
+//         photo: fintech,
+//         rating: 4.7,
+//         reviews: [
+//             {
+//                 userId: 105,
+//                 userName: "Петр Сидоров",
+//                 comment: "Отличные решения для бизнеса!",
+//                 rating: 5,
+//                 userPhoto: "https://example.com/photos/user5.jpg",
+//             },
+//             {
+//                 userId: 106,
+//                 userName: "Алексей Иванов",
+//                 comment: "Не хватает документации для разработчиков.",
+//                 rating: 3,
+//                 userPhoto: "https://example.com/photos/user6.jpg",
+//             },
+//         ],
+//         likes: 17,
+//         email: "support@fintech.com",
+//         address: "Екатеринбург, ул. Финансовая, д. 5",
+//         services: ["Разработка приложений", "API для банков", "Консультации по финансам"],
+//         website: "www.fintechsolutions.com",
+//         workingHours: "08:00 - 17:00",
+//         workingDays: "Пн - Пт",
+//     },
+//     {
+//         id: 4,
+//         name: "EduSmart",
+//         description: "Онлайн-платформа для обучения.",
+//         detailedDescription: "EduSmart предлагает курсы по программированию и другим IT-направлениям. Мы помогаем людям развивать навыки и находить работу в сфере технологий. Обучение проходит в удобном формате, что позволяет учиться в своем темпе.",
+//         photo: edusmart,
+//         rating: 4.8,
+//         reviews: [
+//             {
+//                 userId: 107,
+//                 userName: "Дмитрий Фролов",
+//                 comment: "Лучший ресурс для обучения программированию!",
+//                 rating: 5,
+//                 userPhoto: "https://example.com/photos/user7.jpg",
+//             },
+//             {
+//                 userId: 108,
+//                 userName: "Елена Григорьева",
+//                 comment: "Много полезной информации и курсов.",
+//                 rating: 4,
+//                 userPhoto: "https://example.com/photos/user8.jpg",
+//             },
+//         ],
+//         likes: 20,
+//         email: "info@edusmart.com",
+//         address: "Казань, ул. Учебная, д. 15",
+//         services: ["Курсы по программированию", "Мастер-классы", "Консультации"],
+//         website: "www.edusmart.com",
+//         workingHours: "09:00 - 20:00",
+//         workingDays: "Пн - Вс",
+//     },
+//     {
+//         id: 5,
+//         name: "It-Help",
+//         description: "Служба поддержки IT-инфраструктуры.",
+//         detailedDescription: "It-Help предоставляет услуги по поддержке и обслуживанию IT-инфраструктуры для бизнеса, а также разработку кастомизированных решений. Наша команда работает на результат и всегда готова помочь.",
+//         photo: ithelp,
+//         rating: 4.3,
+//         reviews: [
+//             {
+//                 userId: 109,
+//                 userName: "Сергей Алексеев",
+//                 comment: "Хорошая служба поддержки.",
+//                 rating: 4,
+//                 userPhoto: "https://example.com/photos/user9.jpg",
+//             },
+//             {
+//                 userId: 110,
+//                 userName: "Татьяна Лебедева",
+//                 comment: "Проблемы решаются быстро.",
+//                 rating: 5,
+//                 userPhoto: "https://example.com/photos/user10.jpg",
+//             },
+//         ],
+//         likes: 11,
+//         email: "help@ithelp.com",
+//         address: "Новосибирск, ул. IT, д. 8",
+//         services: ["Поддержка IT-инфраструктуры", "Разработка ПО", "Консультации"],
+//         website: "www.ithelp.com",
+//         workingHours: "09:00 - 18:00",
+//         workingDays: "Пн - Пт",
+//     },
+//     {
+//         id: 6,
+//         name: "MediCare",
+//         description: "Инновационные программные решения для медицины.",
+//         detailedDescription: "MediCare предлагает передовые программные решения для медицинских учреждений. Мы помогаем оптимизировать процессы, улучшить качество обслуживания и обеспечить безопасность данных пациентов.",
+//         photo: medicare,
+//         rating: 4.6,
+//         reviews: [
+//             {
+//                 userId: 111,
+//                 userName: "Артем Васильев",
+//                 comment: "Отличный софт для медицины.",
+//                 rating: 5,
+//                 userPhoto: "https://example.com/photos/user11.jpg",
+//             },
+//             {
+//                 userId: 112,
+//                 userName: "Светлана Романова",
+//                 comment: "Идеально для клиник.",
+//                 rating: 4,
+//                 userPhoto: "https://example.com/photos/user12.jpg",
+//             },
+//         ],
+//         likes: 18,
+//         email: "info@medicare.com",
+//         address: "Москва, ул. Медицинская, д. 3",
+//         services: ["Программное обеспечение для клиник", "Телемедицина", "Управление медицинскими данными"],
+//         website: "www.medicare.com",
+//         workingHours: "08:00 - 17:00",
+//         workingDays: "Пн - Пт",
+//     },
+//     {
+//         id: 7,
+//         name: "AgroWorld",
+//         description: "Разработка IT-инструментов для сельского хозяйства.",
+//         detailedDescription: "AgroWorld предлагает современные IT-решения для автоматизации процессов в сельском хозяйстве. Мы помогаем фермерам и агрокомпаниям повышать эффективность и устойчивость бизнеса.",
+//         photo: agroworld,
+//         rating: 4.0,
+//         reviews: [
+//             {
+//                 userId: 113,
+//                 userName: "Евгений Рябов",
+//                 comment: "Хорошие инструменты для агробизнеса.",
+//                 rating: 4,
+//                 userPhoto: "https://example.com/photos/user13.jpg",
+//             },
+//             {
+//                 userId: 114,
+//                 userName: "Ксения Пономарева",
+//                 comment: "Помогли оптимизировать процессы.",
+//                 rating: 4,
+//                 userPhoto: "https://example.com/photos/user14.jpg",
+//             },
+//         ],
+//         likes: 5,
+//         email: "contact@agroworld.com",
+//         address: "Калуга, ул. Сельская, д. 10",
+//         services: ["Агро-IT решения", "Консультации для фермеров", "Автоматизация процессов"],
+//         website: "www.agroworld.com",
+//         workingHours: "09:00 - 17:00",
+//         workingDays: "Пн - Пт",
+//     },
+//     {
+//         id: 8,
+//         name: "LightBULB",
+//         description: "Умные решения для освещения.",
+//         detailedDescription: "LightBULB предлагает инновационные решения для умного освещения. Мы используем современные технологии, чтобы сделать ваш дом более комфортным и безопасным.",
+//         photo: lampochka,
+//         rating: 4.1,
+//         reviews: [
+//             {
+//                 userId: 115,
+//                 userName: "Евгений Кузнецов",
+//                 comment: "Интересные решения, но цена высока.",
+//                 rating: 3,
+//                 userPhoto: "https://example.com/photos/user15.jpg",
+//             },
+//             {
+//                 userId: 116,
+//                 userName: "Людмила Сидорова",
+//                 comment: "Довольна покупкой. Рекомендую!",
+//                 rating: 5,
+//                 userPhoto: "https://example.com/photos/user16.jpg",
+//             },
+//         ],
+//         likes: 7,
+//         email: "info@lightbulb.com",
+//         address: "Ростов-на-Дону, ул. Светлая, д. 5",
+//         services: ["Умное освещение", "Консультации по освещению", "Продажа оборудования"],
+//         website: "www.lightbulb.com",
+//         workingHours: "10:00 - 19:00",
+//         workingDays: "Пн - Сб",
+//     },
+//     {
+//         id: 9,
+//         name: "ITECHNOLOGY",
+//         description: "IT-продукты для бизнеса.",
+//         detailedDescription: "ITECHNOLOGY создает IT-продукты для автоматизации бизнеса и повышения производительности. Мы помогаем компаниям оптимизировать внутренние процессы и улучшить результаты.",
+//         photo: itechnology,
+//         rating: 4.6,
+//         reviews: [
+//             {
+//                 userId: 117,
+//                 userName: "Роман Гусев",
+//                 comment: "Качественные продукты.",
+//                 rating: 5,
+//                 userPhoto: "https://example.com/photos/user17.jpg",
+//             },
+//             {
+//                 userId: 118,
+//                 userName: "Светлана Мельникова",
+//                 comment: "Проблемы с интеграцией.",
+//                 rating: 3,
+//                 userPhoto: "https://example.com/photos/user18.jpg",
+//             },
+//         ],
+//         likes: 16,
+//         email: "info@itechnology.com",
+//         address: "Воронеж, ул. IT, д. 20",
+//         services: ["Разработка ПО", "IT-консалтинг", "Системная интеграция"],
+//         website: "www.itechnology.com",
+//         workingHours: "09:00 - 18:00",
+//         workingDays: "Пн - Пт",
+//     },
+// ];
+//
+// // Сохраняем данные в localStorage
+// if (!localStorage.getItem("companies")) {
+//     localStorage.setItem("companies", JSON.stringify(companiesArray));
+// }

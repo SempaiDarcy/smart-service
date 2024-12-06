@@ -7,6 +7,8 @@ import {Home} from "./pages/home/home.tsx";
 import {Catalog} from "./pages/catalog/catalog.tsx";
 import {Profile} from "./pages/profile/profile.tsx";
 import {Navbar} from "./components/navbar/navbar.tsx";
+import {CompanyPage} from "./pages/page-company/company-page.tsx";
+import {RegisterNavbar} from "./components/navbar/register-navbar.tsx";
 
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
     if (!isAuthenticated) {
         return (
             <Router>
+                <RegisterNavbar/>
                 <Routes>
                     <Route path="/" element={<AuthLanding/>}/>
                     <Route path="/login" element={<Login/>}/>
@@ -31,6 +34,7 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/catalog" element={<Catalog/>}/>
                 <Route path="/profile" element={<Profile/>}/>
+                <Route path="/catalog/:id" element={<CompanyPage/>}/>
             </Routes>
         </Router>
     );

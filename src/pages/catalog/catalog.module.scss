@@ -38,9 +38,9 @@
 
   .companyList {
     display: flex;
-    flex-wrap: wrap; /* Для автоматического переноса на следующую строку */
-    gap: 1.5rem; /* Расстояние между карточками */
-    justify-content: center; /* Выравнивание по центру */
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
     padding-bottom: 4rem;
   }
 
@@ -49,8 +49,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    width: 350px; /* Фиксированная ширина */
-    height: 450px; /* Фиксированная высота */
+    width: 350px;
+    height: 450px;
     padding: 1rem;
     text-align: center;
     background-color: #FFFFFF;
@@ -66,8 +66,8 @@
 
     .photo {
       width: 100%;
-      height: 250px; /* Фиксированная высота для всех изображений */
-      object-fit: cover; /* Сохранение пропорций изображения */
+      height: 250px;
+      object-fit: cover;
       border-radius: 8px;
       margin-bottom: 1rem;
     }
