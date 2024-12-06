@@ -1,76 +1,126 @@
-import {Card, CardContent, List, ListItem, ListItemIcon, ListItemText, Typography} from "@mui/material";
-import {Person, Search, Star} from "@mui/icons-material";
+import { Typography, Card, CardContent, List, ListItem, ListItemText } from "@mui/material";
+import Typewriter from "typewriter-effect";
 
 export const Home = () => {
     return (
-            <Card
-                sx={{
-                    maxWidth: "800px",
-                    margin: "5rem auto 0",
-                    backgroundColor: "#1F2937",
-                    color: "#E5E7EB",
-                    borderRadius: "12px",
-                    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.5)",
-                    padding: "1rem",
-                }}
-            >
-                <CardContent>
-                    <Typography
-                        variant="h4"
-                        component="h1"
-                        gutterBottom
-                        sx={{
-                            fontWeight: "bold",
-                            color: "#3B82F6",
-                            textAlign: "center",
+        <div style={{paddingTop:'3rem', overflow:'hidden'}}><Card
+            sx={{
+                maxWidth: "70%",
+                margin: "3rem auto",
+                backgroundColor: "#1F2937",
+                color: "#E5E7EB",
+                borderRadius: "16px",
+                boxShadow: "0 6px 20px rgba(0, 0, 0, 0.8)",
+                // padding: "2rem",
+            }}
+        >
+            <CardContent>
+                {/* Заголовок с Typewriter */}
+                <Typography
+                    variant="h4"
+                    component="h1"
+                    gutterBottom
+                    sx={{
+                        fontWeight: "bold",
+                        color: "#3B82F6",
+                        textAlign: "center",
+                        marginBottom: "2rem",
+                    }}
+                >
+                    <Typewriter
+                        options={{
+                            strings: [
+                                "Добро пожаловать в Smart-Service!",
+                                "Ваш проводник в мире услуг и компаний!",
+                                "Оцените, найдите, взаимодействуйте!",
+                            ],
+                            autoStart: true,
+                            loop: true,
+                            delay: 50,
+                            deleteSpeed: 25,
                         }}
-                    >
-                        Добро пожаловать на платформу!
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                        Наша миссия — облегчить взаимодействие между бизнесами и клиентами, предоставляя удобные
-                        инструменты для поиска и оценки услуг.
-                    </Typography>
-                    <Typography variant="body1" paragraph>
-                        Исследуйте каталог компаний, просматривайте их профили и оставляйте отзывы.
-                        Убедитесь, что все ваши данные актуальны в разделе <strong>Личный кабинет</strong>.
-                    </Typography>
-                    <Typography variant="h6" component="p" sx={{fontWeight: "bold", marginTop: "1rem"}}>
-                        Вы можете:
-                    </Typography>
-                    <List sx={{color: "#E5E7EB"}}>
-                        <ListItem>
-                            <ListItemIcon sx={{color: "#3B82F6"}}>
-                                <Search/>
-                            </ListItemIcon>
-                            <ListItemText
-                                primary="🔍 Найти компанию в Каталоге"
-                                primaryTypographyProps={{variant: "body1"}}
-                            />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon sx={{color: "#3B82F6"}}>
-                                <Star/>
-                            </ListItemIcon>
-                            <ListItemText
-                                primary="⭐ Оставить отзыв и посмотреть рейтинг услуг"
-                                primaryTypographyProps={{variant: "body1"}}
-                            />
-                        </ListItem>
-                        <ListItem>
-                            <ListItemIcon sx={{color: "#3B82F6"}}>
-                                <Person/>
-                            </ListItemIcon>
-                            <ListItemText
-                                primary="👤 Управлять своими данными в Личном кабинете"
-                                primaryTypographyProps={{variant: "body1"}}
-                            />
-                        </ListItem>
-                    </List>
-                    <Typography variant="body1" sx={{marginTop: "1rem"}}>
-                        Выберите раздел для работы через меню выше.
-                    </Typography>
-                </CardContent>
-            </Card>
+                    />
+                </Typography>
+
+                {/* Описание платформы */}
+                <Typography
+                    variant="h6"
+                    paragraph
+                    sx={{
+                        textAlign: "center",
+                        fontWeight: "500",
+                        fontSize: "1.2rem",
+                        lineHeight: "1.8",
+                        marginBottom: "2rem",
+                    }}
+                >
+                    Smart-Service — это удобная платформа для поиска компаний,
+                    оценки их услуг и взаимодействия с другими пользователями.
+                    Узнайте больше о бизнесах, оставляйте отзывы и находите лучшее для себя!
+                </Typography>
+
+                {/* Возможности платформы */}
+                <Typography
+                    variant="h5"
+                    sx={{
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        fontSize: "1.6rem",
+                        color: "#FFD700",
+                        marginBottom: "2rem",
+                    }}
+                >
+                    Что вы можете сделать:
+                </Typography>
+
+                <List
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1.5rem",
+                        maxWidth: "800px",
+                        margin: "0 auto",
+                        color: "#E5E7EB",
+                    }}
+                >
+                    <ListItem>
+                        <ListItemText
+                            primary="🔍 Поиск компаний"
+                            secondary="Ищите компании по названию или рейтингу. Узнайте всё, что нужно, всего за несколько кликов."
+                            primaryTypographyProps={{variant: "h6", fontWeight: "bold", textAlign: "center"}}
+                            secondaryTypographyProps={{
+                                variant: "body1",
+                                textAlign: "center",
+                                color: "#E5E7EB",
+                            }}
+                        />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText
+                            primary="⭐ Оставляйте отзывы"
+                            secondary="Делитесь своим мнением, помогая другим пользователям находить качественные услуги."
+                            primaryTypographyProps={{variant: "h6", fontWeight: "bold", textAlign: "center"}}
+                            secondaryTypographyProps={{
+                                variant: "body1",
+                                textAlign: "center",
+                                color: "#E5E7EB",
+                            }}
+                        />
+                    </ListItem>
+                    <ListItem>
+                        <ListItemText
+                            primary="🧑‍💻 Управляйте профилем"
+                            secondary="Редактируйте свои данные, добавляйте фото и следите за вашей активностью на платформе."
+                            primaryTypographyProps={{variant: "h6", fontWeight: "bold", textAlign: "center"}}
+                            secondaryTypographyProps={{
+                                variant: "body1",
+                                textAlign: "center",
+                                color: "#E5E7EB",
+                            }}
+                        />
+                    </ListItem>
+                </List>
+            </CardContent>
+        </Card></div>
     );
 };
