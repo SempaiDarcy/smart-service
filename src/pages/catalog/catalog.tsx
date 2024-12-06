@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Добавляем для перехода на страницу компании
+import { Link } from "react-router-dom";
 import { Card } from "../../components/card/card";
 import { Company } from "../../types/company";
 import s from "./catalog.module.scss";
@@ -50,9 +50,9 @@ export const Catalog = () => {
                 <div className={s.companyList}>
                     {filteredCompanies.map((company) => (
                         <Link
-                            to={`/catalog/${company.id}`} // Добавляем ссылку на страницу компании
+                            to={`/catalog/${company.id}`}
                             key={company.id}
-                            style={{ textDecoration: "none", color: "inherit" }} // Убираем подчеркивание
+                            style={{ textDecoration: "none", color: "inherit" }}
                         >
                             <div className={s.companyCard}>
                                 <img src={company.photo} alt={company.name} className={s.photo} />
