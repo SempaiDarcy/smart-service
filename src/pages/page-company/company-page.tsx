@@ -164,19 +164,23 @@ export const CompanyPage = () => {
                 Услуги
             </Typography>
             <Grid container spacing={2} sx={{ marginTop: "1rem" }}>
-                {company.services.map((service, index) => (
-                    <Grid size={{ xs: 12, md: 4 }} key={index}>
-                        <Card sx={{ padding: "1rem", height: "100%" }}>
-                            <Typography variant="h6">{service.name}</Typography>
-                            <Typography>{service.description}</Typography>
-                            {service.priceRange && (
-                                <Typography>
-                                    <strong>Цена:</strong> {service.priceRange}
-                                </Typography>
-                            )}
-                        </Card>
-                    </Grid>
-                ))}
+                {company.services?.length > 0 ? (
+                    company.services.map((service, index) => (
+                        <Grid size={{ xs: 12, md: 4 }} key={index}>
+                            <Card sx={{ padding: "1rem", height: "100%" }}>
+                                <Typography variant="h6">{service.name}</Typography>
+                                <Typography>{service.description}</Typography>
+                                {service.priceRange && (
+                                    <Typography>
+                                        <strong>Цена:</strong> {service.priceRange}
+                                    </Typography>
+                                )}
+                            </Card>
+                        </Grid>
+                    ))
+                ) : (
+                    <Typography>Услуги не найдены.</Typography>
+                )}
             </Grid>
 
             {/* Отображение отзывов */}
