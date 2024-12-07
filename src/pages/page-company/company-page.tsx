@@ -159,7 +159,13 @@ export const CompanyPage = () => {
             <Grid container spacing={2} sx={{ marginTop: "1rem" }}>
                 {company.services.map((service, index) => (
                     <Grid size={{ xs: 12, md: 4 }} key={index}>
-                        <Card sx={{ padding: "1rem", height: "100%" }}>
+                        <Card sx={{ padding: "1rem", height: "100%",
+                            transition: "transform 0.2s, box-shadow 0.2s", // Плавный переход
+                            cursor:'pointer',
+                            '&:hover': {
+                                transform: 'translateY(-5px)',
+                                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+                            }, }}>
                             <Typography variant="h6">{service.name}</Typography>
                             <Typography>{service.description}</Typography>
                             {service.priceRange && (
