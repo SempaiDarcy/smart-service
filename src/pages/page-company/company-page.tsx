@@ -1,5 +1,4 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
     Typography,
     Box,
@@ -9,34 +8,34 @@ import {
     Avatar,
     IconButton,
     Rating,
+    Alert,
 } from "@mui/material";
-import Grid from '@mui/material/Grid2';
-import { AttachFile } from "@mui/icons-material";
+import Grid from "@mui/material/Grid2";
+import { AttachFile, PersonAdd } from "@mui/icons-material";
+import { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
 import { Company, Review } from "../../types/company";
 
 export const CompanyPage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [company, setCompany] = useState<Company | null>(null);
-    const [newReview, setNewReview] = useState(""); // Текст нового отзыва
-    const [attachedFile, setAttachedFile] = useState<File | null>(null); // Прикрепленный файл
-    const [newRating, setNewRating] = useState<number | null>(null); // Рейтинг нового отзыва
+    const [newReview, setNewReview] = useState("");
+    const [attachedFile, setAttachedFile] = useState<File | null>(null);
+    const [newRating, setNewRating] = useState<number | null>(null);
     const [currentUser, setCurrentUser] = useState<any>(() =>
         JSON.parse(localStorage.getItem("myProject_currentUser") || "{}")
     );
 
     useEffect(() => {
-        // Загружаем текущую компанию
         const companies = JSON.parse(localStorage.getItem("companies") || "[]");
         const currentCompany = companies.find((c: Company) => c.id === Number(id));
         setCompany(currentCompany);
 
-        // Загружаем текущего пользователя
         const updatedUser = JSON.parse(
             localStorage.getItem("myProject_currentUser") || "{}"
         );
         setCurrentUser(updatedUser);
 
-        // Обновляем все комментарии пользователя в компании
         if (currentCompany) {
             const updatedReviews = currentCompany.reviews.map((review: Review) => {
                 if (review.userId === updatedUser.id) {
@@ -86,9 +85,9 @@ export const CompanyPage = () => {
 
         setCompany(updatedCompany);
         localStorage.setItem("companies", JSON.stringify(updatedCompanies));
-        setNewReview(""); // Очищаем поле ввода
-        setAttachedFile(null); // Очищаем прикрепленный файл
-        setNewRating(null); // Сбрасываем рейтинг
+        setNewReview("");
+        setAttachedFile(null);
+        setNewRating(null);
     };
 
     const handleFileAttach = (e: ChangeEvent<HTMLInputElement>) => {
@@ -109,15 +108,8 @@ export const CompanyPage = () => {
     return (
         <Box sx={{ padding: "5rem", overflowY: "auto" }}>
             <Typography variant="h4">{company.name}</Typography>
-            <Card
-                sx={{
-                    display: "flex",
-                    gap: "2rem",
-                    marginTop: "2rem",
-                    padding: "1rem",
-                    overflow: "hidden",
-                }}
-            >
+
+            <Card sx={{ display: "flex", gap: "2rem", marginTop: "2rem", padding: "1rem" }}>
                 <img
                     src={company.photo}
                     alt={company.name}
@@ -129,6 +121,9 @@ export const CompanyPage = () => {
                     }}
                 />
                 <Box>
+                    <Typography sx={{ marginTop: "1rem" }}>
+                        <strong>Рейтинг:</strong> {company.fullDescription}
+                    </Typography>
                     <Typography sx={{ marginTop: "1rem" }}>
                         <strong>Рейтинг:</strong> {company.rating.toFixed(1)}
                     </Typography>
@@ -158,7 +153,6 @@ export const CompanyPage = () => {
                 </Box>
             </Card>
 
-            {/* Отображение услуг */}
             <Typography variant="h5" sx={{ marginTop: "2rem" }}>
                 Услуги
             </Typography>
@@ -178,7 +172,6 @@ export const CompanyPage = () => {
                 ))}
             </Grid>
 
-            {/* Отображение отзывов */}
             <Typography variant="h5" sx={{ marginTop: "4rem" }}>
                 Отзывы
             </Typography>
@@ -201,48 +194,62 @@ export const CompanyPage = () => {
                 <Typography>Пока отзывов нет.</Typography>
             )}
 
-            {/* Добавить отзыв */}
-            <Box sx={{ marginTop: "2rem" }}>
-                <Typography variant="h6">Добавить отзыв</Typography>
-                <TextField
-                    multiline
-                    rows={4}
-                    fullWidth
-                    variant="outlined"
-                    placeholder="Напишите ваш отзыв"
-                    value={newReview}
-                    onChange={(e) => setNewReview(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    sx={{ marginTop: "1rem" }}
-                />
-                <Box sx={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem" }}>
-                    <Rating
-                        value={newRating}
-                        onChange={(_e, newValue) => setNewRating(newValue)}
-                    />
-                    <IconButton component="label">
-                        <AttachFile />
-                        <input
-                            type="file"
-                            hidden
-                            accept="image/*"
-                            onChange={handleFileAttach}
-                        />
-                    </IconButton>
+            {!currentUser?.id && (
+                <Alert
+                    severity="info"
+                    sx={{ marginTop: "2rem", padding: "1.5rem", border:"1px solid gray" }}
+                >
+                    <Typography variant="h6" gutterBottom>
+                        Вы уже пользовались услугами? Не хотите оставить отзыв?
+                    </Typography>
                     <Button
                         variant="contained"
-                        onClick={handleReviewSubmit}
-                        disabled={!newReview.trim() || !newRating}
+                        startIcon={<PersonAdd />}
+                        onClick={() => navigate("/auth")}
                     >
-                        Отправить
+                        Зарегистрироваться
                     </Button>
+                </Alert>
+            )}
+
+            {currentUser?.id && (
+                <Box sx={{ marginTop: "2rem" }}>
+                    <Typography variant="h6">Добавить отзыв</Typography>
+                    <TextField
+                        multiline
+                        rows={4}
+                        fullWidth
+                        variant="outlined"
+                        placeholder="Напишите ваш отзыв"
+                        value={newReview}
+                        onChange={(e) => setNewReview(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        sx={{ marginTop: "1rem" }}
+                    />
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem" }}>
+                        <Rating
+                            value={newRating}
+                            onChange={(_e, newValue) => setNewRating(newValue)}
+                        />
+                        <IconButton component="label">
+                            <AttachFile />
+                            <input type="file" hidden accept="image/*" onChange={handleFileAttach} />
+                        </IconButton>
+                        <Button
+                            variant="contained"
+                            onClick={handleReviewSubmit}
+                            disabled={!newReview.trim() || !newRating}
+                        >
+                            Отправить
+                        </Button>
+                    </Box>
+                    {attachedFile && (
+                        <Typography sx={{ marginTop: "1rem" }}>
+                            Прикрепленный файл: {attachedFile.name}
+                        </Typography>
+                    )}
                 </Box>
-                {attachedFile && (
-                    <Typography sx={{ marginTop: "1rem" }}>
-                        Прикрепленный файл: {attachedFile.name}
-                    </Typography>
-                )}
-            </Box>
+            )}
         </Box>
     );
 };
