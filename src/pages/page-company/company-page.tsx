@@ -129,7 +129,6 @@ export const CompanyPage = () => {
                     }}
                 />
                 <Box>
-                    <Typography>{company.detailedDescription}</Typography>
                     <Typography sx={{ marginTop: "1rem" }}>
                         <strong>Рейтинг:</strong> {company.rating.toFixed(1)}
                     </Typography>
