@@ -2,6 +2,7 @@ export interface Company {
     id: number; // Уникальный ID компании
     name: string; // Название компании
     description: string; // Краткое описание компании
+    fullDescription: string,
     photo: string; // URL или путь к фото
     rating: number; // Средний рейтинг (0-5)
     reviews: Review[]; // Массив отзывов

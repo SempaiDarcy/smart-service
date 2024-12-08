@@ -1,5 +1,4 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect, ChangeEvent, KeyboardEvent } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
     Typography,
     Box,
@@ -7,57 +6,70 @@ import {
     TextField,
     Button,
     Avatar,
-    IconButton,
     Rating,
+    Alert,
 } from "@mui/material";
-import Grid from '@mui/material/Grid2';
-import { AttachFile } from "@mui/icons-material";
+import Grid from "@mui/material/Grid2";
+import { PersonAdd } from "@mui/icons-material";
+import { useState, useEffect, KeyboardEvent } from "react";
 import { Company, Review } from "../../types/company";
 
 export const CompanyPage = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
+
     const [company, setCompany] = useState<Company | null>(null);
-    const [newReview, setNewReview] = useState(""); // Текст нового отзыва
-    const [attachedFile, setAttachedFile] = useState<File | null>(null); // Прикрепленный файл
-    const [newRating, setNewRating] = useState<number | null>(null); // Рейтинг нового отзыва
+    const [newReview, setNewReview] = useState("");
+    const [newRating, setNewRating] = useState<number | null>(null);
     const [currentUser, setCurrentUser] = useState<any>(() =>
         JSON.parse(localStorage.getItem("myProject_currentUser") || "{}")
     );
 
-    useEffect(() => {
-        // Загружаем текущую компанию
+    // Загрузка данных компании и пользователя
+    const loadData = () => {
         const companies = JSON.parse(localStorage.getItem("companies") || "[]");
         const currentCompany = companies.find((c: Company) => c.id === Number(id));
         setCompany(currentCompany);
 
-        // Загружаем текущего пользователя
         const updatedUser = JSON.parse(
             localStorage.getItem("myProject_currentUser") || "{}"
         );
         setCurrentUser(updatedUser);
 
-        // Обновляем все комментарии пользователя в компании
-        if (currentCompany) {
+        // Обновляем отзывы, если пользователь обновился
+        if (currentCompany && updatedUser.id) {
             const updatedReviews = currentCompany.reviews.map((review: Review) => {
                 if (review.userId === updatedUser.id) {
                     return {
                         ...review,
                         userName: `${updatedUser.firstName} ${updatedUser.lastName}`.trim(),
-                        userPhoto: updatedUser.photo,
+                        userPhoto: updatedUser.photo || "",
                     };
                 }
                 return review;
             });
 
             const updatedCompany = { ...currentCompany, reviews: updatedReviews };
-            setCompany(updatedCompany);
-
             const updatedCompanies = companies.map((c: Company) =>
                 c.id === currentCompany.id ? updatedCompany : c
             );
+
+            setCompany(updatedCompany);
             localStorage.setItem("companies", JSON.stringify(updatedCompanies));
         }
+    };
+
+    useEffect(() => {
+        loadData(); // Загрузка данных при монтировании компонента
     }, [id]);
+
+    // const handleServiceClick = (serviceName: string) => {
+    //     if (!currentUser?.id) {
+    //         navigate("/auth");
+    //     } else {
+    //         navigate(`/company/${id}/chat/${serviceName}`);
+    //     }
+    // };
 
     const handleReviewSubmit = () => {
         if (!company || !newReview.trim() || !newRating) return;
@@ -86,15 +98,8 @@ export const CompanyPage = () => {
 
         setCompany(updatedCompany);
         localStorage.setItem("companies", JSON.stringify(updatedCompanies));
-        setNewReview(""); // Очищаем поле ввода
-        setAttachedFile(null); // Очищаем прикрепленный файл
-        setNewRating(null); // Сбрасываем рейтинг
-    };
-
-    const handleFileAttach = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setAttachedFile(e.target.files[0]);
-        }
+        setNewReview("");
+        setNewRating(null);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -109,15 +114,8 @@ export const CompanyPage = () => {
     return (
         <Box sx={{ padding: "5rem", overflowY: "auto" }}>
             <Typography variant="h4">{company.name}</Typography>
-            <Card
-                sx={{
-                    display: "flex",
-                    gap: "2rem",
-                    marginTop: "2rem",
-                    padding: "1rem",
-                    overflow: "hidden",
-                }}
-            >
+
+            <Card sx={{ display: "flex", gap: "2rem", marginTop: "2rem", padding: "1rem" }}>
                 <img
                     src={company.photo}
                     alt={company.name}
@@ -129,6 +127,9 @@ export const CompanyPage = () => {
                     }}
                 />
                 <Box>
+                    <Typography sx={{ marginTop: "1rem" }}>
+                        <strong>Описание:</strong> {company.fullDescription}
+                    </Typography>
                     <Typography sx={{ marginTop: "1rem" }}>
                         <strong>Рейтинг:</strong> {company.rating.toFixed(1)}
                     </Typography>
@@ -158,14 +159,25 @@ export const CompanyPage = () => {
                 </Box>
             </Card>
 
-            {/* Отображение услуг */}
             <Typography variant="h5" sx={{ marginTop: "2rem" }}>
                 Услуги
             </Typography>
             <Grid container spacing={2} sx={{ marginTop: "1rem" }}>
                 {company.services.map((service, index) => (
                     <Grid size={{ xs: 12, md: 4 }} key={index}>
-                        <Card sx={{ padding: "1rem", height: "100%" }}>
+                        <Card
+                            // onClick={() => handleServiceClick(service.name)}
+                            sx={{
+                                padding: "1rem",
+                                height: "100%",
+                                transition: "transform 0.2s, box-shadow 0.2s",
+                                cursor: "pointer",
+                                "&:hover": {
+                                    transform: "translateY(-5px)",
+                                    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
+                                },
+                            }}
+                        >
                             <Typography variant="h6">{service.name}</Typography>
                             <Typography>{service.description}</Typography>
                             {service.priceRange && (
@@ -178,7 +190,6 @@ export const CompanyPage = () => {
                 ))}
             </Grid>
 
-            {/* Отображение отзывов */}
             <Typography variant="h5" sx={{ marginTop: "4rem" }}>
                 Отзывы
             </Typography>
@@ -190,7 +201,7 @@ export const CompanyPage = () => {
                                 {!review.userPhoto && review.userName[0]}
                             </Avatar>
                             <Box>
-                                <Typography>{review.userName}</Typography>
+                                <Typography variant="h6">{review.userName}</Typography>
                                 <Typography>{review.comment}</Typography>
                                 <Rating value={review.rating} readOnly />
                             </Box>
@@ -201,48 +212,53 @@ export const CompanyPage = () => {
                 <Typography>Пока отзывов нет.</Typography>
             )}
 
-            {/* Добавить отзыв */}
-            <Box sx={{ marginTop: "2rem" }}>
-                <Typography variant="h6">Добавить отзыв</Typography>
-                <TextField
-                    multiline
-                    rows={4}
-                    fullWidth
-                    variant="outlined"
-                    placeholder="Напишите ваш отзыв"
-                    value={newReview}
-                    onChange={(e) => setNewReview(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    sx={{ marginTop: "1rem" }}
-                />
-                <Box sx={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem" }}>
-                    <Rating
-                        value={newRating}
-                        onChange={(_e, newValue) => setNewRating(newValue)}
-                    />
-                    <IconButton component="label">
-                        <AttachFile />
-                        <input
-                            type="file"
-                            hidden
-                            accept="image/*"
-                            onChange={handleFileAttach}
-                        />
-                    </IconButton>
+            {!currentUser?.id && (
+                <Alert
+                    severity="info"
+                    sx={{ marginTop: "2rem", padding: "1.5rem" }}
+                >
+                    <Typography variant="h6" gutterBottom>
+                        Хотите оставить отзыв?
+                    </Typography>
                     <Button
                         variant="contained"
-                        onClick={handleReviewSubmit}
-                        disabled={!newReview.trim() || !newRating}
+                        startIcon={<PersonAdd />}
+                        onClick={() => navigate("/auth")}
                     >
-                        Отправить
+                        Зарегистрироваться
                     </Button>
+                </Alert>
+            )}
+
+            {currentUser?.id && (
+                <Box sx={{ marginTop: "2rem" }}>
+                    <Typography variant="h6">Добавить отзыв</Typography>
+                    <TextField
+                        multiline
+                        rows={4}
+                        fullWidth
+                        variant="outlined"
+                        placeholder="Напишите ваш отзыв"
+                        value={newReview}
+                        onChange={(e) => setNewReview(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        sx={{ marginTop: "1rem" }}
+                    />
+                    <Box sx={{ display: "flex", alignItems: "center", gap: "1rem", marginTop: "1rem" }}>
+                        <Rating
+                            value={newRating}
+                            onChange={(_, newValue) => setNewRating(newValue)}
+                        />
+                        <Button
+                            variant="contained"
+                            onClick={handleReviewSubmit}
+                            disabled={!newReview.trim() || !newRating}
+                        >
+                            Отправить
+                        </Button>
+                    </Box>
                 </Box>
-                {attachedFile && (
-                    <Typography sx={{ marginTop: "1rem" }}>
-                        Прикрепленный файл: {attachedFile.name}
-                    </Typography>
-                )}
-            </Box>
+            )}
         </Box>
     );
 };
