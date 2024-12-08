@@ -5,7 +5,7 @@ import { Catalog } from "./pages/catalog/catalog.tsx";
 import { Profile } from "./pages/profile/profile.tsx";
 import { Navbar } from "./components/navbar/navbar.tsx";
 import { CompanyPage } from "./pages/page-company/company-page.tsx";
-import {ChatPage} from "./pages/chat-page/chat-page.tsx";
+// import {ChatPage} from "./pages/chat-page/chat-page.tsx";
 
 function App() {
     return (
@@ -17,7 +17,7 @@ function App() {
                 <Route path="/catalog/:id" element={<CompanyPage />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/auth" element={<AuthLanding/>}/>
-                <Route path="/company/:id/chat" element={<ChatPage />} />
+                {/*<Route path="/company/:id/chat" element={<ChatPage />} />*/}
                 {/*<Route path="/auth" element={<LoginRegister />} />*/}
             </Routes>
         </Router>
